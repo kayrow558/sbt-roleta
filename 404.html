@@ -22,6 +22,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
+            flex-wrap: wrap; /* Adicionado para o layout horizontal no celular */
         }
 
         .navbar .logo {
@@ -44,10 +45,13 @@
         .navbar .menu-items {
             display: flex;
             align-items: center;
+            flex-wrap: wrap; /* Mantém o menu horizontal no celular */
+            justify-content: center;
+            width: 100%; /* Ocupa toda a largura para a organização horizontal */
         }
 
         .navbar .menu-items a {
-            margin-left: 15px;
+            margin: 10px;
             padding: 10px 20px;
             border-radius: 20px;
             background-color: transparent;
@@ -103,15 +107,15 @@
             text-align: center;
             font-size: 18px;
             font-weight: bold;
-            margin-top: 10px; /* Ajuste o valor conforme necessário para reposicionar */
+            margin-top: 10px;
         }
 
         /* Roleta */
         .container {
             position: relative;
-            width: 80%;
-            max-width: 400px;
-            height: 400px;
+            width: 90%; /* Aumentando o tamanho da roleta */
+            max-width: 450px; /* Tamanho maior */
+            height: 450px; /* Tamanho maior */
             margin: 20px auto;
             border-radius: 50%;
             overflow: hidden;
@@ -135,181 +139,35 @@
             left: 0;
         }
 
-        /* Ponteiro maior */
         .ponteiro {
             z-index: 10;
-            width: 80px; /* Aumentado o tamanho do ponteiro */
+            width: 80px;
             height: 80px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
-        .popupmensagem-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .popupmensagem {
-            background-color: white;
-            border-radius: 10px;
-            text-align: center;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .popupmensagem h2 {
-            color: #333;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .popupmensagem p {
-            color: #666;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .popupmensagem .elementor-button.tentar-novamente {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .popupmensagem .elementor-button.tentar-novamente:hover {
-            background-color: #45a049;
-        }
-
-        .popupganho {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 20;
-            text-align: center;
-            font-size: 24px;
-        }
-
-        /* Estilo do popup de vitória */
-        .popup-container {
-            background-color: white;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            text-align: center;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2000; /* Certifique-se de que fique na frente da roleta */
-            display: none;
-        }
-
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo escurecido */
-            z-index: 1999;
-            display: none;
-        }
-
-        .popup-container h1 {
-            color: #333;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .popup-container img {
-            width: 350px; /* Aumentando o tamanho da imagem */
-            margin-bottom: 10px;
-        }
-
-        .popup-container p {
-            color: #555;
-            font-size: 16px;
-            margin: 10px 0;
-        }
-
-        .popup-container .btn {
-            display: inline-block;
-            padding: 12px 20px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .popup-container .btn:hover {
-            background-color: #555;
-        }
-
-        .popup-container .timer {
-            color: red;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .popup-container img.ganhador {
-            width: 350px; /* Tamanho ainda maior da imagem de vitória */
-            margin-top: 20px;
-        }
-
-        /* Confetes */
-        .confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
         /* Responsividade para celular */
         @media screen and (max-width: 600px) {
+            .navbar {
+                justify-content: center;
+            }
+
             .navbar .menu-items {
-                flex-direction: column;
-                align-items: flex-start;
+                flex-direction: row; /* Menu organizado horizontalmente no celular */
+                flex-wrap: wrap;
             }
 
             .navbar .menu-items a {
-                margin-left: 0;
-                margin-bottom: 10px;
-                padding: 10px;
-                width: 100%;
-                text-align: center;
+                margin: 5px;
+                padding: 8px 15px;
+                font-size: 12px;
             }
 
             .container {
-                width: 100%;
-                max-width: 300px;
-                height: 300px;
+                max-width: 350px;
+                height: 350px;
             }
 
             .elementor-button.girar {
@@ -323,10 +181,6 @@
 
             .titulo {
                 font-size: 28px;
-            }
-
-            .popup-container img.ganhador {
-                width: 300px; /* Ajuste para telas menores */
             }
         }
     </style>
@@ -349,7 +203,6 @@
             <a href="https://tv.sbt.com.br/inscricoes">Inscrições</a>
             <a href="https://tv.sbt.com.br/videos">Vídeos</a>
             <a href="https://tv.sbt.com.br/podcasts">Podcasts</a>
-        </div>
         </div>
         <div class="search-icon">
             <i class="fas fa-search"></i> <!-- Ícone de busca -->
@@ -384,18 +237,6 @@
         Parabéns! Você ganhou o super prêmio!
     </div>
 
-    <!-- Popup de vitória -->
-    <div class="popup-overlay"></div> <!-- Fundo escuro ao redor do popup -->
-    <div class="popup-container" id="popup-vitoria">
-        <h1>PARABÉNS!!</h1>
-        <img src="escolha.png" alt="Escolha seu prêmio" class="ganhador"> <!-- Imagem de vitória aumentada -->
-        <p><strong>Parabéns!</strong> Você ganhou o <span class="green-text">Prêmio!</span></p>
-        <p>Escolha 1 prêmio abaixo.</p>
-        <p class="timer">Este evento expira dentro de <span id="countdown">5</span> minutos!</p> <!-- Alterado para 5 minutos -->
-        <a href="#" class="btn">Aproveitar prêmio</a>
-    </div>
-
-    <!-- Som removido -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script>
@@ -429,9 +270,9 @@
                 mensagem = "Parabéns! Você ganhou o super prêmio!";
             }
 
-            // Sempre girar no mínimo 360 graus (1 volta completa) + o ângulo do prêmio
-            const rotationDegrees = 360 + anguloProduto;
-            const rotationDuration = 1.2; // A rotação agora dura 1.2 segundos (mais rápida)
+            // Gira 360 graus extras (mais voltas) + o ângulo do prêmio
+            const rotationDegrees = 360 * 8 + anguloProduto; // Gira 8 voltas completas
+            const rotationDuration = 3; // A rotação agora dura 3 segundos (para mais voltas)
             const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
 
             roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
@@ -459,28 +300,9 @@
                     // Exibir popup de vitória e iniciar a contagem regressiva
                     popupVitoria.style.display = 'block';
                     popupOverlay.style.display = 'block'; // Mostrar fundo escuro
-                    iniciarContagemRegressiva(5); // Iniciar contagem para 5 minutos
                 }
             }, rotationDuration * 1000);
         });
-
-        // Função de contagem regressiva
-        function iniciarContagemRegressiva(minutos) {
-            var countdownElement = document.getElementById("countdown");
-            var countdown = minutos * 60; // Tempo em segundos
-
-            var interval = setInterval(function() {
-                countdown--;
-                var minutes = Math.floor(countdown / 60);
-                var seconds = countdown % 60;
-                countdownElement.textContent = minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
-
-                if (countdown <= 0) {
-                    clearInterval(interval);
-                    countdownElement.textContent = "0:00";
-                }
-            }, 1000); // Atualiza a cada segundo
-        }
     });
     </script>
 
