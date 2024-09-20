@@ -35,19 +35,13 @@
             margin-right: 10px;
         }
 
-        .navbar .menu-toggle {
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-        }
-
         .navbar .menu-items {
             display: flex;
             align-items: center;
+            gap: 10px;
         }
 
         .navbar .menu-items a {
-            margin-left: 15px;
             padding: 10px 20px;
             border-radius: 20px;
             background-color: transparent;
@@ -68,33 +62,21 @@
         }
 
         /* Estilo da barra de pesquisa */
-        .search-bar {
-            position: relative;
+        .navbar .search-bar {
             display: flex;
             align-items: center;
         }
 
-        .search-bar input {
+        .navbar .search-bar input {
             padding: 8px;
-            border: none;
-            border-radius: 20px;
-            width: 150px;
-            transition: width 0.3s ease-in-out;
+            border-radius: 5px;
+            border: 1px solid white;
             outline: none;
+            width: 200px;
         }
 
-        .search-bar input:focus {
-            width: 250px;
-        }
-
-        .search-bar button {
-            background-color: transparent;
-            border: none;
-            color: white;
-            position: absolute;
-            right: 10px;
-            font-size: 18px;
-            cursor: pointer;
+        .navbar .search-bar input:focus {
+            border-color: #FF7300;
         }
 
         /* Botão para girar */
@@ -122,7 +104,7 @@
             text-align: center;
             font-size: 18px;
             font-weight: bold;
-            margin-top: 10px; /* Ajuste o valor conforme necessário para reposicionar */
+            margin-top: 10px;
         }
 
         /* Roleta */
@@ -166,16 +148,7 @@
         /* Responsividade para celular */
         @media screen and (max-width: 600px) {
             .navbar .menu-items {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar .menu-items a {
-                margin-left: 0;
-                margin-bottom: 10px;
-                padding: 10px;
-                width: 100%;
-                text-align: center;
+                flex-direction: row; /* Organiza horizontalmente no mobile */
             }
 
             .container {
@@ -196,111 +169,87 @@
             .titulo {
                 font-size: 28px;
             }
-
-            .popup-container img.ganhador {
-                width: 350px; /* Ajuste para telas menores */
-            }
         }
     </style>
 </head>
 <body>
 
- <!-- Novo Menu de Navegação -->
- <nav class="navbar">
-    <div class="menu-toggle">
-        <i class="fas fa-bars"></i> <!-- Ícone de menu -->
-    </div>
+<!-- Novo Menu de Navegação -->
+<nav class="navbar">
     <div class="logo">
         <img src="logo_sbt-removebg-preview.png" alt="Logo SBT"> <!-- Substitua o caminho pela imagem correta -->
     </div>
     <div class="menu-items">
-        <a href="#">Ao vivo</a>
+        <a href="#" class="active">Ao Vivo</a>
         <a href="#">Programação</a>
         <a href="#">Programas</a>
-        <a href="#">Inscrições</a>
         <a href="#">Vídeos</a>
     </div>
     <div class="search-bar">
         <input type="text" placeholder="Pesquisar...">
-        <button><i class="fas fa-search"></i></button> <!-- Ícone de busca funcional -->
     </div>
 </nav>
 
-    <!-- Roleta -->
-    <div class="titulo">Gire a roleta e ganhe</div>
-    <div class="container">
-        <img src="roleta 1.png" class="roleta1" alt="Roleta 1">
-        <img src="roleta2.png" class="roleta2" alt="Roleta 2">
-        <img src="ponteiro.webp" class="ponteiro" alt="Ponteiro">
+<!-- Roleta -->
+<div class="titulo">Gire a roleta e ganhe</div>
+<div class="container">
+    <img src="roleta 1.png" class="roleta1" alt="Roleta 1">
+    <img src="roleta2.png" class="roleta2" alt="Roleta 2">
+    <img src="ponteiro.webp" class="ponteiro" alt="Ponteiro">
+</div>
+
+<!-- Botão para girar -->
+<button class="elementor-button girar">Girar</button>
+
+<!-- Contador de Giros -->
+<div class="contador">Giros restantes: <span id="contadorGiros">4</span></div>
+
+<!-- Popups de mensagem e vitória -->
+<div class="popupmensagem-container">
+    <div class="popupmensagem">
+        <h2>Quaaase! Foi por pouco!</h2>
+        <p>Mas não se preocupe, você ainda pode tentar novamente!</p>
+        <div style="font-size: 50px;">😮‍💨</div>
+        <button class="elementor-button tentar-novamente">Tentar novamente</button>
     </div>
+</div>
 
-    <!-- Botão para girar -->
-    <button class="elementor-button girar">Girar</button>
+<div class="popupganho">
+    Parabéns! Você ganhou o super prêmio!
+</div>
 
-    <!-- Contador de Giros -->
-    <div class="contador">Giros restantes: <span id="contadorGiros">4</span> <!-- Agora com 4 giros --></div>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var girar = document.querySelector(".girar");
+    var contadorElement = document.getElementById("contadorGiros");
+    var giros = 4;
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var girar = document.querySelector(".girar");
-        var contadorElement = document.getElementById("contadorGiros");
+    girar.addEventListener('click', function() {
+        girar.style.display = "none";
+        const roleta1 = document.querySelector('.roleta1');
+        const roleta2 = document.querySelector('.roleta2');
+        roleta1.style.display = 'none';
+        roleta2.style.display = 'block';
 
-        var giros = 4; // Total de giros disponíveis agora é 4
+        let anguloProduto = Math.random() * 360;
 
-        girar.addEventListener('click', function() {
-            girar.style.display = "none";
+        // Gira 10 vezes antes de parar
+        const rotationDegrees = 3600 + anguloProduto;
+        const rotationDuration = 2;
+        const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
 
-            const roleta1 = document.querySelector('.roleta1');
-            roleta1.style.display = 'none';
+        roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
+        roleta2.style.transform = `rotate(${rotationDegrees}deg)`;
 
-            const roleta2 = document.querySelector('.roleta2');
-            roleta2.style.display = 'block';
-
-            roleta2.offsetWidth;
-
-            let anguloProduto;
-            let mensagem;
-
-            if (giros > 1) {
-                anguloProduto = giros === 4 ? 460 : 980;
-                mensagem = giros === 2 ? "Último giro!" : "Gire novamente!";
-            } else {
-                anguloProduto = 355;
-                mensagem = "Parabéns! Você ganhou o super prêmio!";
-            }
-
-            const rotationDegrees = 360 + anguloProduto;
-            const rotationDuration = 2; // A rotação agora dura 2 segundos
-            const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
-
-            roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
-            roleta2.style.transform = `rotate(${rotationDegrees}deg)`;
-
-            setTimeout(function() {
-                if (giros > 1) {
-                    document.querySelector('.popupmensagem-container').style.display = 'flex';
-
-                    document.querySelector('.tentar-novamente').addEventListener('click', function() {
-                        document.querySelector('.popupmensagem-container').style.display = 'none';
-                        girar.style.display = 'block';
-                        contadorElement.textContent = --giros; // Diminui o contador
-                    });
-                } else {
-                    const popupGanho = document.querySelector('.popupganho');
-                    popupGanho.style.display = 'block';
-
-                    confetti({
-                        particleCount: 100,
-                        spread: 70,
-                        origin: { y: 0.6 }
-                    });
-                }
-            }, rotationDuration * 1000);
-        });
+        setTimeout(function() {
+            girar.style.display = 'block';
+            contadorElement.textContent = --giros;
+        }, rotationDuration * 1000);
     });
-    </script>
+});
+</script>
 
 </body>
 </html>
