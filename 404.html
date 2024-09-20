@@ -22,7 +22,6 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            flex-wrap: wrap; /* Adicionado para o layout horizontal no celular */
         }
 
         .navbar .logo {
@@ -36,29 +35,23 @@
             margin-right: 10px;
         }
 
-        .navbar .menu-toggle {
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-        }
-
         .navbar .menu-items {
             display: flex;
-            align-items: center;
-            flex-wrap: wrap; /* Mantém o menu horizontal no celular */
             justify-content: center;
-            width: 100%; /* Ocupa toda a largura para a organização horizontal */
+            align-items: center;
+            flex-wrap: wrap; /* Ajusta o menu horizontal */
+            gap: 10px;
         }
 
         .navbar .menu-items a {
-            margin: 10px;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 20px;
             background-color: transparent;
             border: 1px solid white;
             color: white;
             text-decoration: none;
             font-size: 14px;
+            transition: background-color 0.3s ease;
         }
 
         .navbar .menu-items a:hover {
@@ -74,12 +67,6 @@
         .navbar .search-icon {
             font-size: 24px;
             color: white;
-        }
-
-        .navbar .title {
-            font-size: 20px;
-            color: white;
-            font-weight: bold;
         }
 
         /* Botão para girar */
@@ -113,22 +100,12 @@
         /* Roleta */
         .container {
             position: relative;
-            width: 90%; /* Aumentando o tamanho da roleta */
-            max-width: 450px; /* Tamanho maior */
-            height: 450px; /* Tamanho maior */
+            width: 80%; /* Aumenta o tamanho da roleta */
+            max-width: 450px;
+            height: 450px;
             margin: 20px auto;
             border-radius: 50%;
             overflow: hidden;
-        }
-
-        /* Estilizando o texto "Gire a roleta e ganhe" */
-        .titulo {
-            text-align: center;
-            font-size: 36px;
-            font-weight: bold;
-            color: #FF5733; /* Cor vibrante */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Sombra do texto */
-            margin-bottom: 20px;
         }
 
         .roleta1, .roleta2, .ponteiro {
@@ -141,28 +118,28 @@
 
         .ponteiro {
             z-index: 10;
-            width: 80px;
-            height: 80px;
+            width: 60px; /* Ajusta o tamanho do ponteiro */
+            height: 60px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
+        /* Estilo do título */
+        .titulo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #FF5733;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+        }
+
         /* Responsividade para celular */
         @media screen and (max-width: 600px) {
-            .navbar {
-                justify-content: center;
-            }
-
             .navbar .menu-items {
-                flex-direction: row; /* Menu organizado horizontalmente no celular */
-                flex-wrap: wrap;
-            }
-
-            .navbar .menu-items a {
-                margin: 5px;
-                padding: 8px 15px;
-                font-size: 12px;
+                flex-direction: row;
+                justify-content: center;
             }
 
             .container {
@@ -189,13 +166,9 @@
 
     <!-- Novo Menu de Navegação -->
     <nav class="navbar">
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i> <!-- Ícone de menu -->
-        </div>
         <div class="logo">
             <img src="logo_sbt-removebg-preview.png" alt="Logo SBT"> <!-- Substitua o caminho pela imagem correta -->
         </div>
-        <div class="title">tv</div>
         <div class="menu-items">
             <a href="https://www.sbt.com.br/ao-vivo" class="active">Ao vivo</a>
             <a href="https://tv.sbt.com.br/programacao">Programação</a>
@@ -221,7 +194,7 @@
     <button class="elementor-button girar">Girar</button>
 
     <!-- Contador de Giros -->
-    <div class="contador">Giros restantes: <span id="contadorGiros">4</span></div> <!-- Agora com 4 giros -->
+    <div class="contador">Giros restantes: <span id="contadorGiros">4</span></div>
 
     <!-- Popups de mensagem e vitória -->
     <div class="popupmensagem-container">
@@ -243,9 +216,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         var girar = document.querySelector(".girar");
         var contadorElement = document.getElementById("contadorGiros");
-        var popupVitoria = document.getElementById("popup-vitoria");
-        var popupOverlay = document.querySelector('.popup-overlay');
-
         var giros = 4; // Total de giros disponíveis agora é 4
 
         girar.addEventListener('click', function() {
@@ -257,22 +227,18 @@
             const roleta2 = document.querySelector('.roleta2');
             roleta2.style.display = 'block';
 
-            roleta2.offsetWidth;
+            roleta2.offsetWidth; // Força o reflow para reiniciar a animação
 
             let anguloProduto;
-            let mensagem;
-
             if (giros > 1) {
-                anguloProduto = giros === 4 ? 460 : 980;
-                mensagem = giros === 2 ? "Último giro!" : "Gire novamente!";
+                anguloProduto = giros === 4 ? 460 : 980; // Define o ângulo
             } else {
-                anguloProduto = 355;
-                mensagem = "Parabéns! Você ganhou o super prêmio!";
+                anguloProduto = 355; // Ângulo final para super prêmio
             }
 
-            // Gira 360 graus extras (mais voltas) + o ângulo do prêmio
-            const rotationDegrees = 360 * 8 + anguloProduto; // Gira 8 voltas completas
-            const rotationDuration = 3; // A rotação agora dura 3 segundos (para mais voltas)
+            // Gira 8 vezes (360 * 8) antes de parar no ponto designado
+            const rotationDegrees = 360 * 8 + anguloProduto;
+            const rotationDuration = 3.5; // Gira mais rápido com duração de 3.5s
             const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
 
             roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
@@ -296,10 +262,6 @@
                         spread: 70,
                         origin: { y: 0.6 }
                     });
-
-                    // Exibir popup de vitória e iniciar a contagem regressiva
-                    popupVitoria.style.display = 'block';
-                    popupOverlay.style.display = 'block'; // Mostrar fundo escuro
                 }
             }, rotationDuration * 1000);
         });
