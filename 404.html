@@ -265,7 +265,7 @@
 <button class="elementor-button girar">Girar</button>
 
 <!-- Contador de Giros -->
-<div class="contador">Giros restantes: <span id="contadorGiros">4</span></div>
+<div class="contador">Giros restantes: <span id="contadorGiros">3</span></div>
 
 <!-- Popups de mensagem e vitória -->
 <div class="popupmensagem-container">
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var popupmensagemContainer = document.querySelector('.popupmensagem-container');
     var popupmensagem = document.querySelector('.popupmensagem');
     var popupganho = document.querySelector('.popupganho');
-    var giros = 4;
+    var giros = 3;
 
     girar.addEventListener('click', function() {
         girar.style.display = "none";
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Gira 10 vezes antes de parar
         const rotationDegrees = 3600 + anguloProduto;
-        const rotationDuration = 2;
+        const rotationDuration = 3;
         const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
 
         roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
