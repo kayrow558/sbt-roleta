@@ -22,7 +22,6 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            overflow-x: auto; /* Para rolar horizontalmente em dispositivos menores */
         }
 
         .navbar .logo {
@@ -45,7 +44,6 @@
         .navbar .menu-items {
             display: flex;
             align-items: center;
-            white-space: nowrap; /* Evita que quebre linha */
         }
 
         .navbar .menu-items a {
@@ -80,18 +78,6 @@
             font-weight: bold;
         }
 
-        /* Ajuste para rolagem horizontal */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-wrap: nowrap;
-                overflow-x: scroll;
-            }
-            .menu-items a {
-                margin-left: 10px;
-                margin-right: 10px;
-            }
-        }
-
         /* Botão para girar */
         .elementor-button.girar {
             display: block;
@@ -117,46 +103,38 @@
             text-align: center;
             font-size: 18px;
             font-weight: bold;
-            margin-top: 10px; /* Ajuste o valor conforme necessário para reposicionar */
+            margin-top: 10px;
         }
 
         /* Roleta */
         .container {
             position: relative;
-            width: 80%;
-            max-width: 400px;
-            height: 400px;
+            width: 100%;
+            max-width: 400px; /* Define um tamanho máximo para a roleta */
+            height: 400px; /* Certifique-se de que a altura seja igual à largura */
             margin: 20px auto;
-            border-radius: 50%;
+            border-radius: 50%; /* Garante que a roleta tenha bordas arredondadas */
             overflow: hidden;
         }
 
-        /* Estilizando o texto "Gire a roleta e ganhe" */
-        .titulo {
-            text-align: center;
-            font-size: 36px;
-            font-weight: bold;
-            color: #FF5733; /* Cor vibrante */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Sombra do texto */
-            margin-bottom: 20px;
-        }
-
-        .roleta1, .roleta2, .ponteiro {
+        .roleta1, .roleta2 {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
+            object-fit: cover; /* Mantém a proporção da imagem */
+            border-radius: 50%; /* Certifique-se de que a roleta seja circular */
         }
 
-        /* Ponteiro maior */
         .ponteiro {
             z-index: 10;
-            width: 80px;
+            width: 80px; /* Aumentado o tamanho do ponteiro */
             height: 80px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            position: absolute;
         }
 
         .popupmensagem-container {
@@ -234,7 +212,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 2000; /* Certifique-se de que fique na frente da roleta */
+            z-index: 2000;
             display: none;
         }
 
@@ -244,7 +222,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo escurecido */
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 1999;
             display: none;
         }
@@ -257,7 +235,7 @@
         }
 
         .popup-container img {
-            width: 350px; /* Aumentando o tamanho da imagem */
+            width: 350px;
             margin-bottom: 10px;
         }
 
@@ -294,17 +272,44 @@
             margin-top: 20px;
         }
 
-        /* Confetes */
-        .confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-        }
+        /* Responsividade para celular */
+        @media screen and (max-width: 600px) {
+            .navbar .menu-items {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
+            .navbar .menu-items a {
+                margin-left: 0;
+                margin-bottom: 10px;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 300px;
+                height: 300px;
+            }
+
+            .elementor-button.girar {
+                width: 80%;
+                font-size: 14px;
+            }
+
+            .contador {
+                font-size: 16px;
+            }
+
+            .titulo {
+                font-size: 28px;
+            }
+
+            .popup-container img.ganhador {
+                width: 300px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -312,7 +317,7 @@
     <!-- Menu de Navegação -->
     <nav class="navbar">
         <div class="menu-toggle">
-            <i class="fas fa-bars"></i> <!-- Ícone de menu -->
+            <i class="fas fa-bars"></i>
         </div>
         <div class="logo">
             <img src="logo_sbt-removebg-preview.png" alt="Logo SBT">
@@ -334,7 +339,7 @@
     <!-- Roleta -->
     <div class="titulo">Gire a roleta e ganhe</div>
     <div class="container">
-        <img src="roleta 1.png" class="roleta1" alt="Roleta 1">
+        <img src="roleta1.png" class="roleta1" alt="Roleta 1">
         <img src="roleta2.png" class="roleta2" alt="Roleta 2">
         <img src="ponteiro.webp" class="ponteiro" alt="Ponteiro">
     </div>
@@ -343,7 +348,7 @@
     <button class="elementor-button girar">Girar</button>
 
     <!-- Contador de Giros -->
-    <div class="contador">Giros restantes: <span id="contadorGiros">4</span></div>
+    <div class="contador">Giros restantes: <span id="contadorGiros">3</span></div>
 
     <!-- Popups de mensagem e vitória -->
     <div class="popupmensagem-container">
@@ -379,7 +384,7 @@
         var popupVitoria = document.getElementById("popup-vitoria");
         var popupOverlay = document.querySelector('.popup-overlay');
 
-        var giros = 4;
+        var giros = 3; // Total de giros
 
         girar.addEventListener('click', function() {
             girar.style.display = "none";
@@ -396,8 +401,8 @@
             let mensagem;
 
             if (giros > 1) {
-                anguloProduto = giros === 4 ? 460 : 980;
-                mensagem = giros === 2 ? "Último giro!" : "Gire novamente!";
+                anguloProduto = giros === 3 ? 460 : 980;
+                mensagem = giros === 1 ? "Último giro!" : "Gire novamente!";
             } else {
                 anguloProduto = 355;
                 mensagem = "Parabéns! Você ganhou o super prêmio!";
