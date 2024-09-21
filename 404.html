@@ -170,6 +170,69 @@
                 font-size: 28px;
             }
         }
+
+        .popupmensagem-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popupmensagem {
+            background-color: white;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .popupmensagem h2 {
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .popupmensagem p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .popupmensagem .elementor-button.tentar-novamente {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popupmensagem .elementor-button.tentar-novamente:hover {
+            background-color: #45a049;
+        }
+
+        .popupganho {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 20;
+            text-align: center;
+            font-size: 24px;
+        }
+
     </style>
 </head>
 <body>
@@ -224,6 +287,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     var girar = document.querySelector(".girar");
     var contadorElement = document.getElementById("contadorGiros");
+    var popupmensagemContainer = document.querySelector('.popupmensagem-container');
+    var popupmensagem = document.querySelector('.popupmensagem');
+    var popupganho = document.querySelector('.popupganho');
     var giros = 4;
 
     girar.addEventListener('click', function() {
@@ -244,8 +310,21 @@ document.addEventListener('DOMContentLoaded', function() {
         roleta2.style.transform = `rotate(${rotationDegrees}deg)`;
 
         setTimeout(function() {
-            girar.style.display = 'block';
-            contadorElement.textContent = --giros;
+            if (giros > 1) {
+                popupmensagemContainer.style.display = 'flex';
+                girar.style.display = 'block';
+                document.querySelector('.tentar-novamente').addEventListener('click', function() {
+                    popupmensagemContainer.style.display = 'none';
+                    contadorElement.textContent = --giros;
+                });
+            } else {
+                popupganho.style.display = 'block';
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
         }, rotationDuration * 1000);
     });
 });
