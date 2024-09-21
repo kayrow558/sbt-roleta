@@ -1,12 +1,10 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Roleta - Homenagem a Silvio Santos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Ícones Font Awesome -->
-    <!-- Resto do código -->
-</head>
-
-
     <style>
         /* Estilo geral */
         body {
@@ -24,6 +22,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
+            overflow-x: auto; /* Para rolar horizontalmente em dispositivos menores */
         }
 
         .navbar .logo {
@@ -46,6 +45,7 @@
         .navbar .menu-items {
             display: flex;
             align-items: center;
+            white-space: nowrap; /* Evita que quebre linha */
         }
 
         .navbar .menu-items a {
@@ -78,6 +78,18 @@
             font-size: 20px;
             color: white;
             font-weight: bold;
+        }
+
+        /* Ajuste para rolagem horizontal */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+            }
+            .menu-items a {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
         }
 
         /* Botão para girar */
@@ -140,7 +152,7 @@
         /* Ponteiro maior */
         .ponteiro {
             z-index: 10;
-            width: 80px; /* Aumentado o tamanho do ponteiro */
+            width: 80px;
             height: 80px;
             top: 50%;
             left: 50%;
@@ -278,7 +290,7 @@
         }
 
         .popup-container img.ganhador {
-            width: 350px; /* Tamanho ainda maior da imagem de vitória */
+            width: 350px;
             margin-top: 20px;
         }
 
@@ -293,55 +305,17 @@
             z-index: 1000;
         }
 
-        /* Responsividade para celular */
-        @media screen and (max-width: 600px) {
-            .navbar .menu-items {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar .menu-items a {
-                margin-left: 0;
-                margin-bottom: 10px;
-                padding: 10px;
-                width: 100%;
-                text-align: center;
-            }
-
-            .container {
-                width: 100%;
-                max-width: 300px;
-                height: 300px;
-            }
-
-            .elementor-button.girar {
-                width: 80%;
-                font-size: 14px;
-            }
-
-            .contador {
-                font-size: 16px;
-            }
-
-            .titulo {
-                font-size: 28px;
-            }
-
-            .popup-container img.ganhador {
-                width: 300px; /* Ajuste para telas menores */
-            }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Novo Menu de Navegação -->
+    <!-- Menu de Navegação -->
     <nav class="navbar">
         <div class="menu-toggle">
             <i class="fas fa-bars"></i> <!-- Ícone de menu -->
         </div>
         <div class="logo">
-            <img src="logo_sbt-removebg-preview.png" alt="Logo SBT"> <!-- Substitua o caminho pela imagem correta -->
+            <img src="logo_sbt-removebg-preview.png" alt="Logo SBT">
         </div>
         <div class="title">tv</div>
         <div class="menu-items">
@@ -353,7 +327,7 @@
             <a href="https://tv.sbt.com.br/podcasts">Podcasts</a>
         </div>
         <div class="search-icon">
-            <i class="fas fa-search"></i> <!-- Ícone de busca -->
+            <i class="fas fa-search"></i>
         </div>
     </nav>
 
@@ -369,7 +343,7 @@
     <button class="elementor-button girar">Girar</button>
 
     <!-- Contador de Giros -->
-    <div class="contador">Giros restantes: <span id="contadorGiros">4</span></div> <!-- Agora com 4 giros -->
+    <div class="contador">Giros restantes: <span id="contadorGiros">4</span></div>
 
     <!-- Popups de mensagem e vitória -->
     <div class="popupmensagem-container">
@@ -386,17 +360,16 @@
     </div>
 
     <!-- Popup de vitória -->
-    <div class="popup-overlay"></div> <!-- Fundo escuro ao redor do popup -->
+    <div class="popup-overlay"></div>
     <div class="popup-container" id="popup-vitoria">
         <h1>PARABÉNS!!</h1>
-        <img src="escolha.png" alt="Escolha seu prêmio" class="ganhador"> <!-- Imagem de vitória aumentada -->
+        <img src="escolha.png" alt="Escolha seu prêmio" class="ganhador">
         <p><strong>Parabéns!</strong> Você ganhou o <span class="green-text">Prêmio!</span></p>
         <p>Escolha 1 prêmio abaixo.</p>
-        <p class="timer">Este evento expira dentro de <span id="countdown">5</span> minutos!</p> <!-- Alterado para 5 minutos -->
+        <p class="timer">Este evento expira dentro de <span id="countdown">5</span> minutos!</p>
         <a href="#" class="btn">Aproveitar prêmio</a>
     </div>
 
-    <!-- Som removido -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script>
@@ -406,7 +379,7 @@
         var popupVitoria = document.getElementById("popup-vitoria");
         var popupOverlay = document.querySelector('.popup-overlay');
 
-        var giros = 4; // Total de giros disponíveis agora é 4
+        var giros = 4;
 
         girar.addEventListener('click', function() {
             girar.style.display = "none";
@@ -430,9 +403,8 @@
                 mensagem = "Parabéns! Você ganhou o super prêmio!";
             }
 
-            // Sempre girar no mínimo 360 graus (1 volta completa) + o ângulo do prêmio
             const rotationDegrees = 360 + anguloProduto;
-            const rotationDuration = 1.2; // A rotação agora dura 1.2 segundos (mais rápida)
+            const rotationDuration = 1.2;
             const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
 
             roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
@@ -445,7 +417,7 @@
                     document.querySelector('.tentar-novamente').addEventListener('click', function() {
                         document.querySelector('.popupmensagem-container').style.display = 'none';
                         girar.style.display = 'block';
-                        contadorElement.textContent = --giros; // Diminui o contador
+                        contadorElement.textContent = --giros;
                     });
                 } else {
                     const popupGanho = document.querySelector('.popupganho');
@@ -457,18 +429,16 @@
                         origin: { y: 0.6 }
                     });
 
-                    // Exibir popup de vitória e iniciar a contagem regressiva
                     popupVitoria.style.display = 'block';
-                    popupOverlay.style.display = 'block'; // Mostrar fundo escuro
-                    iniciarContagemRegressiva(5); // Iniciar contagem para 5 minutos
+                    popupOverlay.style.display = 'block';
+                    iniciarContagemRegressiva(5);
                 }
             }, rotationDuration * 1000);
         });
 
-        // Função de contagem regressiva
         function iniciarContagemRegressiva(minutos) {
             var countdownElement = document.getElementById("countdown");
-            var countdown = minutos * 60; // Tempo em segundos
+            var countdown = minutos * 60;
 
             var interval = setInterval(function() {
                 countdown--;
@@ -480,7 +450,7 @@
                     clearInterval(interval);
                     countdownElement.textContent = "0:00";
                 }
-            }, 1000); // Atualiza a cada segundo
+            }, 1000);
         }
     });
     </script>
