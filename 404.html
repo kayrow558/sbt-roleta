@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <title>Roleta - Homenagem a Silvio Santos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Ícones Font Awesome -->
     <style>
@@ -35,13 +35,19 @@
             margin-right: 10px;
         }
 
+        .navbar .menu-toggle {
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
         .navbar .menu-items {
             display: flex;
             align-items: center;
-            gap: 10px;
         }
 
         .navbar .menu-items a {
+            margin-left: 15px;
             padding: 10px 20px;
             border-radius: 20px;
             background-color: transparent;
@@ -61,22 +67,15 @@
             font-weight: bold;
         }
 
-        /* Estilo da barra de pesquisa */
-        .navbar .search-bar {
-            display: flex;
-            align-items: center;
+        .navbar .search-icon {
+            font-size: 24px;
+            color: white;
         }
 
-        .navbar .search-bar input {
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid white;
-            outline: none;
-            width: 200px;
-        }
-
-        .navbar .search-bar input:focus {
-            border-color: #FF7300;
+        .navbar .title {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
         }
 
         /* Botão para girar */
@@ -104,7 +103,7 @@
             text-align: center;
             font-size: 18px;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 10px; /* Ajuste o valor conforme necessário para reposicionar */
         }
 
         /* Roleta */
@@ -138,8 +137,8 @@
 
         .ponteiro {
             z-index: 10;
-            width: 50px;
-            height: 50px;
+            width: 80px; /* Aumentado o tamanho do ponteiro */
+            height: 80px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -148,7 +147,16 @@
         /* Responsividade para celular */
         @media screen and (max-width: 600px) {
             .navbar .menu-items {
-                flex-direction: row; /* Organiza horizontalmente no mobile */
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar .menu-items a {
+                margin-left: 0;
+                margin-bottom: 10px;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
             }
 
             .container {
@@ -169,117 +177,65 @@
             .titulo {
                 font-size: 28px;
             }
-        }
 
-        .popupmensagem-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+            .popup-container img.ganhador {
+                width: 300px; /* Ajuste para telas menores */
+            }
         }
-
-        .popupmensagem {
-            background-color: white;
-            border-radius: 10px;
-            text-align: center;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .popupmensagem h2 {
-            color: #333;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .popupmensagem p {
-            color: #666;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .popupmensagem .elementor-button.tentar-novamente {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .popupmensagem .elementor-button.tentar-novamente:hover {
-            background-color: #45a049;
-        }
-
-        .popupganho {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 20;
-            text-align: center;
-            font-size: 24px;
-        }
-
     </style>
 </head>
 <body>
 
-<!-- Novo Menu de Navegação -->
-<nav class="navbar">
-    <div class="logo">
-        <img src="logo_sbt-removebg-preview.png" alt="Logo SBT"> <!-- Substitua o caminho pela imagem correta -->
+    <!-- Novo Menu de Navegação -->
+    <nav class="navbar">
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i> <!-- Ícone de menu -->
+        </div>
+        <div class="logo">
+            <img src="logo_sbt-removebg-preview.png" alt="Logo SBT"> <!-- Substitua o caminho pela imagem correta -->
+        </div>
+        <div class="title">tv</div>
+        <div class="menu-items">
+            <a href="https://www.sbt.com.br/ao-vivo" class="active">Ao vivo</a>
+            <a href="https://tv.sbt.com.br/programacao">Programação</a>
+            <a href="https://tv.sbt.com.br/programas">Programas</a>
+            <a href="https://tv.sbt.com.br/inscricoes">Inscrições</a>
+            <a href="https://tv.sbt.com.br/videos">Vídeos</a>
+            <a href="https://tv.sbt.com.br/podcasts">Podcasts</a>
+        </div>
+        </div>
+        <div class="search-icon">
+            <i class="fas fa-search"></i> <!-- Ícone de busca -->
+        </div>
+    </nav>
+
+    <!-- Roleta -->
+    <div class="titulo">Gire a roleta e ganhe</div>
+    <div class="container">
+        <img src="roleta 1.png" class="roleta1" alt="Roleta 1">
+        <img src="roleta2.png" class="roleta2" alt="Roleta 2">
+        <img src="ponteiro.webp" class="ponteiro" alt="Ponteiro">
     </div>
-    <div class="menu-items">
-        <a href="#" class="active">Ao Vivo</a>
-        <a href="#">Programação</a>
-        <a href="#">Programas</a>
-        <a href="#">Vídeos</a>
+
+    <!-- Botão para girar -->
+    <button class="elementor-button girar">Girar</button>
+
+    <!-- Contador de Giros -->
+    <div class="contador">Giros restantes: <span id="contadorGiros">4</span></div> <!-- Agora com 4 giros -->
+
+    <!-- Popups de mensagem e vitória -->
+    <div class="popupmensagem-container">
+        <div class="popupmensagem">
+            <h2>Quaaase! Foi por pouco!</h2>
+            <p>Mas não se preocupe, você ainda pode tentar novamente!</p>
+            <div style="font-size: 50px;">😮‍💨</div>
+            <button class="elementor-button tentar-novamente">Tentar novamente</button>
+        </div>
     </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Pesquisar...">
+
+    <div class="popupganho">
+        Parabéns! Você ganhou o super prêmio!
     </div>
-</nav>
-
-<!-- Roleta -->
-<div class="titulo">Gire a roleta e ganhe</div>
-<div class="container">
-    <img src="roleta 1.png" class="roleta1" alt="Roleta 1">
-    <img src="roleta2.png" class="roleta2" alt="Roleta 2">
-    <img src="ponteiro.webp" class="ponteiro" alt="Ponteiro">
-</div>
-
-<!-- Botão para girar -->
-<button class="elementor-button girar">Girar</button>
-
-<!-- Contador de Giros -->
-<div class="contador">Giros restantes: <span id="contadorGiros">3</span></div>
-
-<!-- Popups de mensagem e vitória -->
-<div class="popupmensagem-container">
-    <div class="popupmensagem">
-        <h2>Quaaase! Foi por pouco!</h2>
-        <p>Mas não se preocupe, você ainda pode tentar novamente!</p>
-        <div style="font-size: 50px;">😮‍💨</div>
-        <button class="elementor-button tentar-novamente">Tentar novamente</button>
-    </div>
-</div>
-
-<div class="popupganho">
-    Parabéns! Você ganhou o super prêmio!
-</div>
 
     <!-- Popup de vitória -->
     <div class="popup-overlay"></div> <!-- Fundo escuro ao redor do popup -->
@@ -291,54 +247,95 @@
         <p class="timer">Este evento expira dentro de <span id="countdown">5</span> minutos!</p> <!-- Alterado para 5 minutos -->
         <a href="#" class="btn">Aproveitar prêmio</a>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var girar = document.querySelector(".girar");
-    var contadorElement = document.getElementById("contadorGiros");
-    var popupmensagemContainer = document.querySelector('.popupmensagem-container');
-    var popupmensagem = document.querySelector('.popupmensagem');
-    var popupganho = document.querySelector('.popupganho');
-    var giros = 3;
+    <!-- Som removido -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
-    girar.addEventListener('click', function() {
-        girar.style.display = "none";
-        const roleta1 = document.querySelector('.roleta1');
-        const roleta2 = document.querySelector('.roleta2');
-        roleta1.style.display = 'none';
-        roleta2.style.display = 'block';
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var girar = document.querySelector(".girar");
+        var contadorElement = document.getElementById("contadorGiros");
+        var popupVitoria = document.getElementById("popup-vitoria");
+        var popupOverlay = document.querySelector('.popup-overlay');
 
-        let anguloProduto = Math.random() * 360;
+        var giros = 4; // Total de giros disponíveis agora é 4
 
-        // Gira 10 vezes antes de parar
-        const rotationDegrees = 3600 + anguloProduto;
-        const rotationDuration = 3;
-        const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
+        girar.addEventListener('click', function() {
+            girar.style.display = "none";
 
-        roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
-        roleta2.style.transform = `rotate(${rotationDegrees}deg)`;
+            const roleta1 = document.querySelector('.roleta1');
+            roleta1.style.display = 'none';
 
-        setTimeout(function() {
+            const roleta2 = document.querySelector('.roleta2');
+            roleta2.style.display = 'block';
+
+            roleta2.offsetWidth;
+
+            let anguloProduto;
+            let mensagem;
+
             if (giros > 1) {
-                popupmensagemContainer.style.display = 'flex';
-                girar.style.display = 'block';
-                document.querySelector('.tentar-novamente').addEventListener('click', function() {
-                    popupmensagemContainer.style.display = 'none';
-                    contadorElement.textContent = --giros;
-                });
+                anguloProduto = giros === 4 ? 460 : 980;
+                mensagem = giros === 2 ? "Último giro!" : "Gire novamente!";
             } else {
-                popupganho.style.display = 'block';
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
+                anguloProduto = 355;
+                mensagem = "Parabéns! Você ganhou o super prêmio!";
             }
-        }, rotationDuration * 1000);
+
+            // Sempre girar no mínimo 360 graus (1 volta completa) + o ângulo do prêmio
+            const rotationDegrees = 360 + anguloProduto;
+            const rotationDuration = 1.2; // A rotação agora dura 1.2 segundos (mais rápida)
+            const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
+
+            roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
+            roleta2.style.transform = `rotate(${rotationDegrees}deg)`;
+
+            setTimeout(function() {
+                if (giros > 1) {
+                    document.querySelector('.popupmensagem-container').style.display = 'flex';
+
+                    document.querySelector('.tentar-novamente').addEventListener('click', function() {
+                        document.querySelector('.popupmensagem-container').style.display = 'none';
+                        girar.style.display = 'block';
+                        contadorElement.textContent = --giros; // Diminui o contador
+                    });
+                } else {
+                    const popupGanho = document.querySelector('.popupganho');
+                    popupGanho.style.display = 'block';
+
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+
+                    // Exibir popup de vitória e iniciar a contagem regressiva
+                    popupVitoria.style.display = 'block';
+                    popupOverlay.style.display = 'block'; // Mostrar fundo escuro
+                    iniciarContagemRegressiva(5); // Iniciar contagem para 5 minutos
+                }
+            }, rotationDuration * 1000);
+        });
+
+        // Função de contagem regressiva
+        function iniciarContagemRegressiva(minutos) {
+            var countdownElement = document.getElementById("countdown");
+            var countdown = minutos * 60; // Tempo em segundos
+
+            var interval = setInterval(function() {
+                countdown--;
+                var minutes = Math.floor(countdown / 60);
+                var seconds = countdown % 60;
+                countdownElement.textContent = minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    countdownElement.textContent = "0:00";
+                }
+            }, 1000); // Atualiza a cada segundo
+        }
     });
-});
-</script>
+    </script>
 
 </body>
 </html>
