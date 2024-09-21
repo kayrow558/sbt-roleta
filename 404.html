@@ -43,28 +43,33 @@
 
         .navbar .menu-items {
             display: flex;
-            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
         }
 
         .navbar .menu-items a {
-            margin-left: 15px;
+            display: inline-block;
+            margin: 0 5px;
             padding: 10px 20px;
-            border-radius: 20px;
-            background-color: transparent;
-            border: 1px solid white;
-            color: white;
-            text-decoration: none;
+            border-radius: 25px; /* Bordas arredondadas para o estilo circular */
+            background-color: white; /* Cor de fundo branca */
+            color: #FF7300; /* Cor do texto laranja */
+            border: none;
             font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para o botão */
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .navbar .menu-items a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: #FF7300; /* Cor laranja no hover */
+            color: white; /* Texto branco no hover */
         }
 
         .navbar .menu-items a.active {
-            background-color: white;
-            color: #FF7300;
-            font-weight: bold;
+            background-color: #FF5733; /* Cor mais forte para o ativo */
+            color: white;
         }
 
         .navbar .search-icon {
