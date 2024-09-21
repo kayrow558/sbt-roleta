@@ -22,6 +22,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .navbar .logo {
@@ -35,39 +38,33 @@
             margin-right: 10px;
         }
 
-        .navbar .menu-toggle {
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-        }
-
         .navbar .menu-items {
             display: flex;
-            justify-content: center;
             flex-grow: 1;
+            justify-content: center;
         }
 
         .navbar .menu-items a {
-            margin: 0 5px;
+            display: inline-block;
+            margin: 0 10px;
             padding: 10px 20px;
-            border-radius: 25px;
-            background-color: white;
-            color: #FF7300;
-            border: none;
+            border-radius: 25px; /* Bordas arredondadas */
+            background-color: white; /* Cor de fundo branca */
+            color: #FF7300; /* Cor do texto laranja */
             font-size: 14px;
-            text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para o botão */
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para os botões */
             transition: background-color 0.3s, color 0.3s;
         }
 
         .navbar .menu-items a:hover {
-            background-color: #FF7300; /* Cor laranja no hover */
-            color: white; /* Texto branco no hover */
+            background-color: #FF5733; /* Cor laranja no hover */
+            color: white;
         }
 
         .navbar .menu-items a.active {
-            background-color: #FF5733; /* Cor mais forte para o ativo */
+            background-color: #FF5733;
             color: white;
         }
 
@@ -114,10 +111,10 @@
         .container {
             position: relative;
             width: 100%;
-            max-width: 400px;
-            height: 400px;
+            max-width: 400px; /* Define um tamanho máximo para a roleta */
+            height: 400px; /* Certifique-se de que a altura seja igual à largura */
             margin: 20px auto;
-            border-radius: 50%;
+            border-radius: 50%; /* Garante que a roleta tenha bordas arredondadas */
             overflow: hidden;
         }
 
@@ -127,8 +124,8 @@
             height: 100%;
             top: 0;
             left: 0;
-            object-fit: cover;
-            border-radius: 50%;
+            object-fit: cover; /* Mantém a proporção da imagem */
+            border-radius: 50%; /* Certifique-se de que a roleta seja circular */
         }
 
         .ponteiro {
@@ -141,6 +138,7 @@
             position: absolute;
         }
 
+        /* Popups e mensagens */
         .popupmensagem-container {
             display: none;
             position: fixed;
@@ -279,17 +277,17 @@
         /* Responsividade para celular */
         @media screen and (max-width: 600px) {
             .navbar .menu-items {
+                flex-direction: row;
                 flex-wrap: wrap;
             }
 
             .navbar .menu-items a {
                 margin-bottom: 10px;
-                padding: 10px 20px;
+                padding: 8px 15px;
                 width: auto;
             }
 
             .container {
-                width: 100%;
                 max-width: 300px;
                 height: 300px;
             }
@@ -317,9 +315,6 @@
 
     <!-- Menu de Navegação -->
     <nav class="navbar">
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
         <div class="logo">
             <img src="logo_sbt-removebg-preview.png" alt="Logo SBT">
         </div>
