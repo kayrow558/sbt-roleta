@@ -14,9 +14,9 @@
             background-color: #FFFFFF; /* Cor de fundo branca */
         }
 
-        /* Cabeçalho (parte superior) */
+        /* Estilo do menu de navegação */
         .navbar {
-            background-color: #FF7300; /* Cor laranja */
+            background-color: #FF7300; /* Cor laranja do menu */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -24,11 +24,13 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            overflow-x: auto; /* Permitir rolagem horizontal */
         }
 
         .navbar .logo {
             display: flex;
             align-items: center;
+            flex-shrink: 0; /* Impede que a logo seja encolhida */
         }
 
         .navbar .logo img {
@@ -41,30 +43,35 @@
             color: white;
             font-size: 20px;
             font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
         }
 
         .navbar .menu-items {
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            flex-grow: 1; /* O menu vai ocupar o espaço restante */
+            justify-content: center; /* Centralizar os itens do menu */
+            overflow-x: auto;
         }
 
         .navbar .menu-items a {
             display: inline-block;
             padding: 10px 20px;
-            border-radius: 30px;
-            background-color: white;
-            color: #FF7300;
+            border-radius: 20px;
+            background-color: white; /* Cor de fundo branca */
+            color: #FF7300; /* Cor do texto laranja */
             font-size: 16px;
             font-weight: bold;
             text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
             transition: background-color 0.3s, transform 0.3s;
         }
 
         .navbar .menu-items a:hover {
             background-color: #FF5733; /* Cor laranja mais escura no hover */
             color: white;
-            transform: translateY(-3px); /* Efeito de elevação no hover */
+            transform: translateY(-3px); /* Pequeno efeito de elevação no hover */
         }
 
         .navbar .menu-items a.active {
@@ -75,43 +82,6 @@
         .navbar .search-icon {
             font-size: 24px;
             color: white;
-        }
-
-        /* Estilo da parte inferior (footer ou barra inferior) */
-        .footer {
-            background-color: #FF7300; /* Cor laranja */
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        .footer p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        /* Responsividade */
-        @media screen and (max-width: 600px) {
-            .navbar .menu-items {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .navbar .menu-items a {
-                padding: 8px 12px;
-                font-size: 14px;
-            }
-
-            .footer {
-                padding: 10px 0;
-            }
-
-            .footer p {
-                font-size: 12px;
-            }
         }
 
         /* Botão para girar */
@@ -160,7 +130,7 @@
             top: 0;
             left: 0;
             object-fit: cover; /* Mantém a proporção da imagem */
-            border-radius: 50%; /* Certifique-se de que a roleta seja circular */
+            border-radius: 50%;
         }
 
         .ponteiro {
@@ -236,89 +206,18 @@
             font-size: 24px;
         }
 
-        /* Estilo do popup de vitória */
-        .popup-container {
-            background-color: white;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            text-align: center;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2000;
-            display: none;
-        }
-
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1999;
-            display: none;
-        }
-
-        .popup-container h1 {
-            color: #333;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .popup-container img {
-            width: 350px;
-            margin-bottom: 10px;
-        }
-
-        .popup-container p {
-            color: #555;
-            font-size: 16px;
-            margin: 10px 0;
-        }
-
-        .popup-container .btn {
-            display: inline-block;
-            padding: 12px 20px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .popup-container .btn:hover {
-            background-color: #555;
-        }
-
-        .popup-container .timer {
-            color: red;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .popup-container img.ganhador {
-            width: 350px;
-            margin-top: 20px;
-        }
-
-        /* Responsividade para celular */
+        /* Responsividade */
         @media screen and (max-width: 600px) {
             .navbar .menu-items {
-                flex-direction: column;
-                gap: 10px;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+                white-space: nowrap; /* Permitir rolagem no eixo x */
             }
 
             .navbar .menu-items a {
-                padding: 8px 12px;
-                font-size: 14px;
+                padding: 8px 10px;
+                font-size: 12px;
             }
 
             .container {
@@ -354,34 +253,31 @@
         </div>
         <div class="title">tv</div>
         <div class="menu-items">
-            <a href="https://www.sbt.com.br/ao-vivo" class="active">Ao vivo</a>
-            <a href="https://tv.sbt.com.br/programacao">Programação</a>
-            <a href="https://tv.sbt.com.br/programas">Programas</a>
-            <a href="https://tv.sbt.com.br/inscricoes">Inscrições</a>
-            <a href="https://tv.sbt.com.br/videos">Vídeos</a>
-            <a href="https://tv.sbt.com.br/podcasts">Podcasts</a>
+            <a href="#" class="active">Ao vivo</a>
+            <a href="#">Programação</a>
+            <a href="#">Programas</a>
+            <a href="#">Inscrições</a>
+            <a href="#">Vídeos</a>
+            <a href="#">Podcasts</a>
         </div>
         <div class="search-icon">
             <i class="fas fa-search"></i>
         </div>
     </nav>
 
-    <!-- Conteúdo principal -->
-    <div style="padding: 20px; text-align: center;">
-        <h1>Gire a roleta e ganhe!</h1>
-        <div class="container">
-            <img src="roleta1.png" class="roleta1" alt="Roleta 1">
-            <img src="roleta2.png" class="roleta2" alt="Roleta 2">
-            <img src="ponteiro.webp" class="ponteiro" alt="Ponteiro">
-        </div>
-        <button class="elementor-button girar">Girar</button>
-        <div class="contador">Giros restantes: <span id="contadorGiros">3</span></div>
+    <!-- Roleta -->
+    <div class="titulo">Gire a roleta e ganhe</div>
+    <div class="container">
+        <img src="roleta1.png" class="roleta1" alt="Roleta 1">
+        <img src="roleta2.png" class="roleta2" alt="Roleta 2">
+        <img src="ponteiro.webp" class="ponteiro" alt="Ponteiro">
     </div>
 
-    <!-- Parte inferior (footer) -->
-    <div class="footer">
-        <p>&copy; 2024 SBT. Todos os direitos reservados.</p>
-    </div>
+    <!-- Botão para girar -->
+    <button class="elementor-button girar">Girar</button>
+
+    <!-- Contador de Giros -->
+    <div class="contador">Giros restantes: <span id="contadorGiros">3</span></div>
 
     <!-- Popups de mensagem e vitória -->
     <div class="popupmensagem-container">
