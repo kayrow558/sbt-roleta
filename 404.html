@@ -42,30 +42,38 @@
             display: flex;
             flex-grow: 1;
             justify-content: center;
+            gap: 10px;
         }
 
         .navbar .menu-items a {
             display: inline-block;
-            margin: 0 10px;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 25px; /* Bordas arredondadas */
-            background-color: white; /* Cor de fundo branca */
-            color: #FF7300; /* Cor do texto laranja */
+            background-color: rgba(255, 255, 255, 0.1); /* Fundo branco transparente */
+            color: white; /* Cor do texto */
             font-size: 14px;
             font-weight: bold;
             text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para os botões */
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .navbar .menu-items a:hover {
-            background-color: #FF5733; /* Cor laranja no hover */
-            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.6); /* Borda branca */
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
         .navbar .menu-items a.active {
-            background-color: #FF5733;
+            background-color: #FF7300; /* Fundo laranja mais claro */
+            border-color: white; /* Borda branca sólida */
             color: white;
+            position: relative;
+        }
+
+        .navbar .menu-items a.active::before {
+            content: '•'; /* Ícone de ponto antes do texto */
+            color: white;
+            margin-right: 8px;
+        }
+
+        .navbar .menu-items a:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Fundo branco mais opaco no hover */
+            border-color: white;
         }
 
         .navbar .search-icon {
