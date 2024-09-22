@@ -12,7 +12,7 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #FF7300; /* Cor de fundo laranja */
         }
 
         /* Estilo do menu de navegação */
@@ -25,6 +25,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            overflow-x: auto; /* Permitir rolagem horizontal */
         }
 
         .navbar .logo {
@@ -40,9 +41,11 @@
 
         .navbar .menu-items {
             display: flex;
-            flex-grow: 1;
             justify-content: center;
             gap: 10px;
+            overflow-x: auto; /* Habilitar rolagem horizontal */
+            white-space: nowrap; /* Evitar quebras de linha nos itens */
+            padding: 10px 0;
         }
 
         .navbar .menu-items a {
@@ -286,13 +289,14 @@
         @media screen and (max-width: 600px) {
             .navbar .menu-items {
                 flex-direction: row;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+                white-space: nowrap; /* Permitir rolagem no eixo x */
             }
 
             .navbar .menu-items a {
-                margin-bottom: 10px;
-                padding: 8px 15px;
-                width: auto;
+                padding: 8px 10px;
+                font-size: 12px;
             }
 
             .container {
