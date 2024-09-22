@@ -50,33 +50,27 @@
 
         .navbar .menu-items a {
             display: inline-block;
-            padding: 8px 15px;
-            border-radius: 25px; /* Bordas arredondadas */
-            background-color: rgba(255, 255, 255, 0.1); /* Fundo branco transparente */
-            color: white; /* Cor do texto */
-            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 30px; /* Bordas mais suaves */
+            background-color: white; /* Cor de fundo branca */
+            color: #FF7300; /* Cor do texto laranja */
+            font-size: 16px; /* Aumentei o tamanho da fonte */
             font-weight: bold;
             text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.6); /* Borda branca */
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-        .navbar .menu-items a.active {
-            background-color: #FF7300; /* Fundo laranja mais claro */
-            border-color: white; /* Borda branca sólida */
-            color: white;
-            position: relative;
-        }
-
-        .navbar .menu-items a.active::before {
-            content: '•'; /* Ícone de ponto antes do texto */
-            color: white;
-            margin-right: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            transition: background-color 0.3s, transform 0.3s; /* Efeitos de transição */
         }
 
         .navbar .menu-items a:hover {
-            background-color: rgba(255, 255, 255, 0.3); /* Fundo branco mais opaco no hover */
-            border-color: white;
+            background-color: #FF5733; /* Cor laranja mais escura no hover */
+            color: white;
+            transform: translateY(-5px); /* Pequeno efeito de elevação no hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra mais intensa no hover */
+        }
+
+        .navbar .menu-items a.active {
+            background-color: #FF5733;
+            color: white;
         }
 
         .navbar .search-icon {
