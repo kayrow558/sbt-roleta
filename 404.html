@@ -9,6 +9,7 @@
         /* Estilo geral */
         body {
             font-family: 'Arial', sans-serif;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
             background-color: #FFFFFF; /* Cor de fundo branca */
@@ -20,10 +21,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 10px;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
             overflow-x: auto; /* Permitir rolagem horizontal */
         }
 
@@ -39,39 +40,32 @@
             margin-right: 10px;
         }
 
-        .navbar .title {
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            margin-right: 20px;
-            flex-shrink: 0;
-        }
-
         .navbar .menu-items {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-grow: 1; /* O menu vai ocupar o espaço restante */
-            justify-content: center; /* Centralizar os itens do menu */
-            overflow-x: auto;
+            overflow-x: auto; /* Habilitar rolagem horizontal */
+            white-space: nowrap; /* Evitar quebras de linha nos itens */
         }
 
         .navbar .menu-items a {
             display: inline-block;
             padding: 10px 20px;
-            border-radius: 20px;
+            border-radius: 30px; /* Bordas mais suaves */
             background-color: white; /* Cor de fundo branca */
             color: #FF7300; /* Cor do texto laranja */
-            font-size: 16px;
+            font-size: 16px; /* Aumentei o tamanho da fonte */
             font-weight: bold;
             text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
-            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            transition: background-color 0.3s, transform 0.3s; /* Efeitos de transição */
         }
 
         .navbar .menu-items a:hover {
             background-color: #FF5733; /* Cor laranja mais escura no hover */
             color: white;
-            transform: translateY(-3px); /* Pequeno efeito de elevação no hover */
+            transform: translateY(-5px); /* Pequeno efeito de elevação no hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra mais intensa no hover */
         }
 
         .navbar .menu-items a.active {
@@ -82,6 +76,15 @@
         .navbar .search-icon {
             font-size: 24px;
             color: white;
+            flex-shrink: 0; /* Impede que o ícone de busca seja encolhido */
+        }
+
+        .navbar .title {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0; /* Impede que o título seja encolhido */
         }
 
         /* Botão para girar */
@@ -130,7 +133,7 @@
             top: 0;
             left: 0;
             object-fit: cover; /* Mantém a proporção da imagem */
-            border-radius: 50%;
+            border-radius: 50%; /* Certifique-se de que a roleta seja circular */
         }
 
         .ponteiro {
@@ -206,7 +209,80 @@
             font-size: 24px;
         }
 
-        /* Responsividade */
+        /* Estilo do popup de vitória */
+        .popup-container {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+            display: none;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+            display: none;
+        }
+
+        .popup-container h1 {
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .popup-container img {
+            width: 350px;
+            margin-bottom: 10px;
+        }
+
+        .popup-container p {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .popup-container .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .popup-container .btn:hover {
+            background-color: #555;
+        }
+
+        .popup-container .timer {
+            color: red;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .popup-container img.ganhador {
+            width: 350px;
+            margin-top: 20px;
+        }
+
+        /* Responsividade para celular */
         @media screen and (max-width: 600px) {
             .navbar .menu-items {
                 flex-direction: row;
@@ -253,12 +329,12 @@
         </div>
         <div class="title">tv</div>
         <div class="menu-items">
-            <a href="#" class="active">Ao vivo</a>
-            <a href="#">Programação</a>
-            <a href="#">Programas</a>
-            <a href="#">Inscrições</a>
-            <a href="#">Vídeos</a>
-            <a href="#">Podcasts</a>
+            <a href="https://www.sbt.com.br/ao-vivo" class="active">Ao vivo</a>
+            <a href="https://tv.sbt.com.br/programacao">Programação</a>
+            <a href="https://tv.sbt.com.br/programas">Programas</a>
+            <a href="https://tv.sbt.com.br/inscricoes">Inscrições</a>
+            <a href="https://tv.sbt.com.br/videos">Vídeos</a>
+            <a href="https://tv.sbt.com.br/podcasts">Podcasts</a>
         </div>
         <div class="search-icon">
             <i class="fas fa-search"></i>
@@ -304,22 +380,89 @@
         <a href="#" class="btn">Aproveitar prêmio</a>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var giros = 3; // Total de giros
-            var girar = document.querySelector(".girar");
-            var contadorElement = document.getElementById("contadorGiros");
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
-            girar.addEventListener('click', function() {
-                if (giros > 0) {
-                    giros--;
-                    contadorElement.textContent = giros;
-                    alert('Você girou a roleta!');
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var girar = document.querySelector(".girar");
+        var contadorElement = document.getElementById("contadorGiros");
+        var popupVitoria = document.getElementById("popup-vitoria");
+        var popupOverlay = document.querySelector('.popup-overlay');
+
+        var giros = 3; // Total de giros
+
+        girar.addEventListener('click', function() {
+            girar.style.display = "none";
+
+            const roleta1 = document.querySelector('.roleta1');
+            roleta1.style.display = 'none';
+
+            const roleta2 = document.querySelector('.roleta2');
+            roleta2.style.display = 'block';
+
+            roleta2.offsetWidth;
+
+            let anguloProduto;
+            let mensagem;
+
+            if (giros > 1) {
+                anguloProduto = giros === 3 ? 460 : 980;
+                mensagem = giros === 1 ? "Último giro!" : "Gire novamente!";
+            } else {
+                anguloProduto = 355;
+                mensagem = "Parabéns! Você ganhou o super prêmio!";
+            }
+
+            const rotationDegrees = 360 + anguloProduto;
+            const rotationDuration = 1.2;
+            const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
+
+            roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
+            roleta2.style.transform = `rotate(${rotationDegrees}deg)`;
+
+            setTimeout(function() {
+                if (giros > 1) {
+                    document.querySelector('.popupmensagem-container').style.display = 'flex';
+
+                    document.querySelector('.tentar-novamente').addEventListener('click', function() {
+                        document.querySelector('.popupmensagem-container').style.display = 'none';
+                        girar.style.display = 'block';
+                        contadorElement.textContent = --giros;
+                    });
                 } else {
-                    alert('Sem giros restantes!');
+                    const popupGanho = document.querySelector('.popupganho');
+                    popupGanho.style.display = 'block';
+
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+
+                    popupVitoria.style.display = 'block';
+                    popupOverlay.style.display = 'block';
+                    iniciarContagemRegressiva(5);
                 }
-            });
+            }, rotationDuration * 1000);
         });
+
+        function iniciarContagemRegressiva(minutos) {
+            var countdownElement = document.getElementById("countdown");
+            var countdown = minutos * 60;
+
+            var interval = setInterval(function() {
+                countdown--;
+                var minutes = Math.floor(countdown / 60);
+                var seconds = countdown % 60;
+                countdownElement.textContent = minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    countdownElement.textContent = "0:00";
+                }
+            }, 1000);
+        }
+    });
     </script>
 
 </body>
