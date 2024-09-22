@@ -17,7 +17,7 @@
 
         /* Estilo do menu de navegação */
         .navbar {
-            background-color: #FF7300; /* Cor laranja original do menu */
+            background-color: #FF7300; /* Cor laranja */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -81,6 +81,37 @@
             font-weight: bold;
         }
 
+        /* Ajustes na roleta */
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Define um tamanho máximo para a roleta */
+            height: 400px; /* Certifique-se de que a altura seja igual à largura */
+            margin: 20px auto;
+            border-radius: 50%; /* Garante que a roleta tenha bordas arredondadas */
+            overflow: hidden;
+        }
+
+        .roleta1, .roleta2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover; /* Mantém a proporção da imagem */
+            border-radius: 50%; /* Certifique-se de que a roleta seja circular */
+        }
+
+        .ponteiro {
+            z-index: 10;
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+
         /* Responsividade para celular */
         @media screen and (max-width: 600px) {
             .navbar {
@@ -111,6 +142,11 @@
 
             .navbar .title {
                 font-size: 18px;
+            }
+
+            .container {
+                max-width: 300px; /* Ajuste do tamanho da roleta no celular */
+                height: 300px;
             }
         }
     </style>
