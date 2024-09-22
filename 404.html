@@ -12,7 +12,7 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4; /* Cor de fundo original */
+            background-color: #FF7300; /* Cor de fundo laranja */
         }
 
         /* Estilo do menu de navegação */
@@ -25,6 +25,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            overflow-x: auto; /* Permitir rolagem horizontal */
         }
 
         .navbar .logo {
@@ -41,33 +42,41 @@
         .navbar .menu-items {
             display: flex;
             justify-content: center;
-            flex-grow: 1;
-            overflow-x: auto; /* Permitir rolagem horizontal no celular */
-            white-space: nowrap;
+            gap: 10px;
+            overflow-x: auto; /* Habilitar rolagem horizontal */
+            white-space: nowrap; /* Evitar quebras de linha nos itens */
+            padding: 10px 0;
         }
 
         .navbar .menu-items a {
             display: inline-block;
             padding: 8px 15px;
-            margin: 0 5px;
             border-radius: 25px; /* Bordas arredondadas */
-            background-color: white; /* Cor de fundo branca */
-            color: #FF7300; /* Cor do texto laranja */
+            background-color: rgba(255, 255, 255, 0.1); /* Fundo branco transparente */
+            color: white; /* Cor do texto */
             font-size: 14px;
             font-weight: bold;
             text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para os botões */
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .navbar .menu-items a:hover {
-            background-color: #FF5733; /* Cor laranja no hover */
-            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.6); /* Borda branca */
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
         .navbar .menu-items a.active {
-            background-color: #FF5733;
+            background-color: #FF7300; /* Fundo laranja mais claro */
+            border-color: white; /* Borda branca sólida */
             color: white;
+            position: relative;
+        }
+
+        .navbar .menu-items a.active::before {
+            content: '•'; /* Ícone de ponto antes do texto */
+            color: white;
+            margin-right: 8px;
+        }
+
+        .navbar .menu-items a:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Fundo branco mais opaco no hover */
+            border-color: white;
         }
 
         .navbar .search-icon {
@@ -81,7 +90,35 @@
             font-weight: bold;
         }
 
-        /* Ajustes na roleta */
+        /* Botão para girar */
+        .elementor-button.girar {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .elementor-button.girar:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        /* Estilo do contador de giros */
+        .contador {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Roleta */
         .container {
             position: relative;
             width: 100%;
@@ -112,41 +149,176 @@
             position: absolute;
         }
 
+        /* Popups e mensagens */
+        .popupmensagem-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popupmensagem {
+            background-color: white;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .popupmensagem h2 {
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .popupmensagem p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .popupmensagem .elementor-button.tentar-novamente {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popupmensagem .elementor-button.tentar-novamente:hover {
+            background-color: #45a049;
+        }
+
+        .popupganho {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 20;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        /* Estilo do popup de vitória */
+        .popup-container {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+            display: none;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+            display: none;
+        }
+
+        .popup-container h1 {
+            color: #333;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .popup-container img {
+            width: 350px;
+            margin-bottom: 10px;
+        }
+
+        .popup-container p {
+            color: #555;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .popup-container .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .popup-container .btn:hover {
+            background-color: #555;
+        }
+
+        .popup-container .timer {
+            color: red;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .popup-container img.ganhador {
+            width: 350px;
+            margin-top: 20px;
+        }
+
         /* Responsividade para celular */
         @media screen and (max-width: 600px) {
-            .navbar {
-                flex-direction: column; /* Alinhar os elementos verticalmente no celular */
-                padding: 10px;
-            }
-
-            .navbar .logo img {
-                width: 35px; /* Ajuste de tamanho da logo */
-                height: 35px;
-            }
-
             .navbar .menu-items {
-                justify-content: flex-start;
-                padding: 10px 0;
-                gap: 10px;
-                overflow-x: auto; /* Habilitar rolagem horizontal */
+                flex-direction: row;
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+                white-space: nowrap; /* Permitir rolagem no eixo x */
             }
 
             .navbar .menu-items a {
-                padding: 8px 10px; /* Reduzir o padding no celular */
+                padding: 8px 10px;
                 font-size: 12px;
             }
 
-            .navbar .search-icon {
-                font-size: 20px;
-            }
-
-            .navbar .title {
-                font-size: 18px;
-            }
-
             .container {
-                max-width: 300px; /* Ajuste do tamanho da roleta no celular */
+                max-width: 300px;
                 height: 300px;
+            }
+
+            .elementor-button.girar {
+                width: 80%;
+                font-size: 14px;
+            }
+
+            .contador {
+                font-size: 16px;
+            }
+
+            .titulo {
+                font-size: 28px;
+            }
+
+            .popup-container img.ganhador {
+                width: 300px;
             }
         }
     </style>
