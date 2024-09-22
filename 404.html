@@ -21,7 +21,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 10px;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -31,6 +31,7 @@
         .navbar .logo {
             display: flex;
             align-items: center;
+            flex-shrink: 0; /* Impede que a logo seja encolhida */
         }
 
         .navbar .logo img {
@@ -41,11 +42,10 @@
 
         .navbar .menu-items {
             display: flex;
-            justify-content: center;
             gap: 10px;
+            flex-grow: 1; /* O menu vai ocupar o espaço restante */
             overflow-x: auto; /* Habilitar rolagem horizontal */
             white-space: nowrap; /* Evitar quebras de linha nos itens */
-            padding: 10px 0;
         }
 
         .navbar .menu-items a {
@@ -76,12 +76,15 @@
         .navbar .search-icon {
             font-size: 24px;
             color: white;
+            flex-shrink: 0; /* Impede que o ícone de busca seja encolhido */
         }
 
         .navbar .title {
             font-size: 20px;
             color: white;
             font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0; /* Impede que o título seja encolhido */
         }
 
         /* Botão para girar */
