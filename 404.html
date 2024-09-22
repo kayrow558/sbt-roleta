@@ -9,29 +9,26 @@
         /* Estilo geral */
         body {
             font-family: 'Arial', sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
             background-color: #FFFFFF; /* Cor de fundo branca */
         }
 
-        /* Estilo do menu de navegação */
+        /* Cabeçalho (parte superior) */
         .navbar {
-            background-color: #FF7300; /* Cor laranja do menu */
+            background-color: #FF7300; /* Cor laranja */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
+            padding: 10px 20px;
             position: sticky;
             top: 0;
-            z-index: 100;
-            overflow-x: auto; /* Permitir rolagem horizontal */
+            z-index: 1000;
         }
 
         .navbar .logo {
             display: flex;
             align-items: center;
-            flex-shrink: 0; /* Impede que a logo seja encolhida */
         }
 
         .navbar .logo img {
@@ -40,32 +37,34 @@
             margin-right: 10px;
         }
 
+        .navbar .title {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
         .navbar .menu-items {
             display: flex;
-            gap: 10px;
-            flex-grow: 1; /* O menu vai ocupar o espaço restante */
-            overflow-x: auto; /* Habilitar rolagem horizontal */
-            white-space: nowrap; /* Evitar quebras de linha nos itens */
+            gap: 20px;
         }
 
         .navbar .menu-items a {
             display: inline-block;
             padding: 10px 20px;
-            border-radius: 30px; /* Bordas mais suaves */
-            background-color: white; /* Cor de fundo branca */
-            color: #FF7300; /* Cor do texto laranja */
-            font-size: 16px; /* Aumentei o tamanho da fonte */
+            border-radius: 30px;
+            background-color: white;
+            color: #FF7300;
+            font-size: 16px;
             font-weight: bold;
             text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-            transition: background-color 0.3s, transform 0.3s; /* Efeitos de transição */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .navbar .menu-items a:hover {
             background-color: #FF5733; /* Cor laranja mais escura no hover */
             color: white;
-            transform: translateY(-5px); /* Pequeno efeito de elevação no hover */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra mais intensa no hover */
+            transform: translateY(-3px); /* Efeito de elevação no hover */
         }
 
         .navbar .menu-items a.active {
@@ -76,15 +75,43 @@
         .navbar .search-icon {
             font-size: 24px;
             color: white;
-            flex-shrink: 0; /* Impede que o ícone de busca seja encolhido */
         }
 
-        .navbar .title {
-            font-size: 20px;
+        /* Estilo da parte inferior (footer ou barra inferior) */
+        .footer {
+            background-color: #FF7300; /* Cor laranja */
             color: white;
-            font-weight: bold;
-            margin-right: 10px;
-            flex-shrink: 0; /* Impede que o título seja encolhido */
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Responsividade */
+        @media screen and (max-width: 600px) {
+            .navbar .menu-items {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .navbar .menu-items a {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            .footer {
+                padding: 10px 0;
+            }
+
+            .footer p {
+                font-size: 12px;
+            }
         }
 
         /* Botão para girar */
@@ -285,15 +312,13 @@
         /* Responsividade para celular */
         @media screen and (max-width: 600px) {
             .navbar .menu-items {
-                flex-direction: row;
-                flex-wrap: nowrap;
-                overflow-x: scroll;
-                white-space: nowrap; /* Permitir rolagem no eixo x */
+                flex-direction: column;
+                gap: 10px;
             }
 
             .navbar .menu-items a {
-                padding: 8px 10px;
-                font-size: 12px;
+                padding: 8px 12px;
+                font-size: 14px;
             }
 
             .container {
@@ -341,19 +366,22 @@
         </div>
     </nav>
 
-    <!-- Roleta -->
-    <div class="titulo">Gire a roleta e ganhe</div>
-    <div class="container">
-        <img src="roleta1.png" class="roleta1" alt="Roleta 1">
-        <img src="roleta2.png" class="roleta2" alt="Roleta 2">
-        <img src="ponteiro.webp" class="ponteiro" alt="Ponteiro">
+    <!-- Conteúdo principal -->
+    <div style="padding: 20px; text-align: center;">
+        <h1>Gire a roleta e ganhe!</h1>
+        <div class="container">
+            <img src="roleta1.png" class="roleta1" alt="Roleta 1">
+            <img src="roleta2.png" class="roleta2" alt="Roleta 2">
+            <img src="ponteiro.webp" class="ponteiro" alt="Ponteiro">
+        </div>
+        <button class="elementor-button girar">Girar</button>
+        <div class="contador">Giros restantes: <span id="contadorGiros">3</span></div>
     </div>
 
-    <!-- Botão para girar -->
-    <button class="elementor-button girar">Girar</button>
-
-    <!-- Contador de Giros -->
-    <div class="contador">Giros restantes: <span id="contadorGiros">3</span></div>
+    <!-- Parte inferior (footer) -->
+    <div class="footer">
+        <p>&copy; 2024 SBT. Todos os direitos reservados.</p>
+    </div>
 
     <!-- Popups de mensagem e vitória -->
     <div class="popupmensagem-container">
@@ -380,89 +408,22 @@
         <a href="#" class="btn">Aproveitar prêmio</a>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var girar = document.querySelector(".girar");
-        var contadorElement = document.getElementById("contadorGiros");
-        var popupVitoria = document.getElementById("popup-vitoria");
-        var popupOverlay = document.querySelector('.popup-overlay');
+        document.addEventListener('DOMContentLoaded', function() {
+            var giros = 3; // Total de giros
+            var girar = document.querySelector(".girar");
+            var contadorElement = document.getElementById("contadorGiros");
 
-        var giros = 3; // Total de giros
-
-        girar.addEventListener('click', function() {
-            girar.style.display = "none";
-
-            const roleta1 = document.querySelector('.roleta1');
-            roleta1.style.display = 'none';
-
-            const roleta2 = document.querySelector('.roleta2');
-            roleta2.style.display = 'block';
-
-            roleta2.offsetWidth;
-
-            let anguloProduto;
-            let mensagem;
-
-            if (giros > 1) {
-                anguloProduto = giros === 3 ? 460 : 980;
-                mensagem = giros === 1 ? "Último giro!" : "Gire novamente!";
-            } else {
-                anguloProduto = 355;
-                mensagem = "Parabéns! Você ganhou o super prêmio!";
-            }
-
-            const rotationDegrees = 360 + anguloProduto;
-            const rotationDuration = 1.2;
-            const easingFunction = 'cubic-bezier(0.08, -0.2, 0.1, 1.05)';
-
-            roleta2.style.transition = `transform ${rotationDuration}s ${easingFunction}`;
-            roleta2.style.transform = `rotate(${rotationDegrees}deg)`;
-
-            setTimeout(function() {
-                if (giros > 1) {
-                    document.querySelector('.popupmensagem-container').style.display = 'flex';
-
-                    document.querySelector('.tentar-novamente').addEventListener('click', function() {
-                        document.querySelector('.popupmensagem-container').style.display = 'none';
-                        girar.style.display = 'block';
-                        contadorElement.textContent = --giros;
-                    });
+            girar.addEventListener('click', function() {
+                if (giros > 0) {
+                    giros--;
+                    contadorElement.textContent = giros;
+                    alert('Você girou a roleta!');
                 } else {
-                    const popupGanho = document.querySelector('.popupganho');
-                    popupGanho.style.display = 'block';
-
-                    confetti({
-                        particleCount: 100,
-                        spread: 70,
-                        origin: { y: 0.6 }
-                    });
-
-                    popupVitoria.style.display = 'block';
-                    popupOverlay.style.display = 'block';
-                    iniciarContagemRegressiva(5);
+                    alert('Sem giros restantes!');
                 }
-            }, rotationDuration * 1000);
+            });
         });
-
-        function iniciarContagemRegressiva(minutos) {
-            var countdownElement = document.getElementById("countdown");
-            var countdown = minutos * 60;
-
-            var interval = setInterval(function() {
-                countdown--;
-                var minutes = Math.floor(countdown / 60);
-                var seconds = countdown % 60;
-                countdownElement.textContent = minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
-
-                if (countdown <= 0) {
-                    clearInterval(interval);
-                    countdownElement.textContent = "0:00";
-                }
-            }, 1000);
-        }
-    });
     </script>
 
 </body>
